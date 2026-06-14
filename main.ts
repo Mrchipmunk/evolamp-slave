@@ -4,6 +4,11 @@ function Off () {
     pins.analogWritePin(AnalogPin.P2, 0)
     return 0
 }
+radio.onReceivedString(function (receivedString) {
+    if (receivedString == "CONNECTED") {
+    	
+    }
+})
 function red () {
     pins.analogWritePin(AnalogPin.P0, 1023)
     pins.analogWritePin(AnalogPin.P1, 0)
@@ -24,11 +29,15 @@ function Blue () {
 }
 let Allowed = true
 let Connected = false
+basic.showIcon(IconNames.Happy)
+basic.pause(500)
+basic.clearScreen()
 basic.forever(function () {
     if (Connected == false) {
         Blue()
         basic.pause(1000)
         Off()
         basic.pause(1000)
+        radio.sendString("ALTCONNECT")
     }
 })
